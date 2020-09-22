@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+      <title>Paris' Site</title>
+      <style>
+        body {
+            background: white smoke;
+            color: rgb(45, 45, 45);
+            padding: 10px;
+            font-family: lucida console;
+        }
+        #all-contents {
+            max-width: 2000px;
+            margin: none;
+        }
+
+        /* navigation menu */
+        nav {
+            background: deepskyblue;
+            margin: 0 auto;
+            margin-bottom: 20px;
+            display: flex;
+            padding: 10px;
+        }
+        h1 {
+            display: flex;
+            align-items: center;
+            color: white;
+            flex: 1;
+            margin: 0;
+        }
+        #nav-ul {
+            list-style-image: none;
+        }
+        .nav-li {
+            display: inline-block;
+            padding: 0 10px;
+        }
+        a {
+            text-decoration: underline;
+            color: #fff;
+        }
+
+        /* main container area beneath menu */
+        main {
+            background: paleturquoise;
+            display: flex;
+        }
+        .sidebar {
+            margin-right: 25px;
+            padding: 10px;
+        }
+        .sidebar-img {
+            width: 100px;
+            border: lightblue inset;
+            border-width: thick
+        }
+        .content {
+            flex: 1;
+            padding: 15px;
+        }
+        #interests {
+            border: 4px dodgerblue ridge;
+            padding: 8px;
+        }
+        h2, h3 {
+            margin: 0px;
+        }
+      </style>
+    </head>
+    
+    <body>
+      <!-- All content goes here -->
+      <div id="all-contents">
+        <nav>
+            <h1>Paris' Marvelous Website</h1>
+            <ul id="nav-ul">
+                <li class="nav-li">
+                    <a href="index.html"> Home </a>
+                </li>
+                <li class="nav-li">
+                    <a href="portfolio.html"> Portfolio </a>
+                </li>
+            </ul>
+        </nav>
+
+        <main>
+            <!-- Sidebar section -->
+            <div class="sidebar">
+                <img class="sidebar-img" src=https://images.vexels.com/media/users/3/189780/isolated/lists/0eb2d2697b34df2a4c758dc8ec64ce1c-leaning-stickman-vector.png
+            </div>
+
+            <!-- Content section -->
+            <div class="content">
+                <h2>Paris Carney</h2>
+                <p>Student at Ben Franklin High</p>
+                <!-- Interests section -->
+                <div id="interests">
+                    <h3>Interests</h3>
+                    <ul>
+                        <li>Drawing</li>
+                        <li>Music</li>
+                        <li>Trivia</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+      </div>
+    </body>
+</html>
