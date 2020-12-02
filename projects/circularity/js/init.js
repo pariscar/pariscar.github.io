@@ -32,7 +32,7 @@ var init = function (window) {
         }
 
         // TODO 3 / 7 : Call the drawCircle() function 
-        for (var count = 0; count < 100; count++){
+        for (var i = 0; i < 100; i++){
             drawCircle();
         }
 
