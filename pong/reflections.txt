@@ -1,0 +1,46 @@
+User Story / Gameplay
+    Describe the gameplay
+        Upon start, a ball will be placed in the middle of the screen, along with two bars. Once the ball
+        begins to move, players will move their bar to prevent it from moving past it. The ball will bounce
+        between the moving bars and a player gains a point when the ball moves past their opponent's bar. The
+        game ends when a player reaches 11 points.
+    What are the conditions when the game begins?
+        When the game begins, a ball is at the middle of the screen with two bars on either side of it.
+    Does the game have an end? If so, what are the conditions for when it ends?
+        The game does have an end, and a restart. When the ball moves past a paddle, it is recentered and a 
+        new round begins. The game ends when a player has 11 points.
+    What ifs will there be?
+        - If the ball hits the bar, it will bounce back in the opposite direction.
+        - If the ball hits a wall, it will also bounce back in the opposite direction.
+        - If the ball moves past the bar, it will recenter and a player will gain a point.
+        - If a player reaches 11 points, then the game ends.
+
+Visual Game Components:
+    What are the visual game components?
+        - Board, ball, two bars, division line?
+    Which will be static?
+        - Board, division line
+    Which will be animated?
+        - Bars, ball
+    What data will you need to manage each game component? 
+        - Positions X + Y of ball and bars, speed of ball, player points
+
+Events / Logic
+    What events will occur in this game? (timer events, keyboard events, clicking events?)
+        - Mouse events
+    How do those events affect the data of the program?
+        - When the mouse moves, so will the bar's position.
+    For each "event", write out the high-level logic of what will happen. It is better (and tricky) to be as specific as you can while remaining high-level!
+        - When the ball hits the walls/bars:
+            The speed is multiplied by -1, moving it in the opposite direction
+        - When the mouse moves:
+            The bars will move
+        - When the ball moves past the bar:
+            The ball's position is reset
+            One player's point total increased by 1
+
+For example: in bouncing box, when the box is clicked:
+
+The speed is increased
+The point total goes up by 1 and is displayed on the box
+The position of the box is reset to 0
