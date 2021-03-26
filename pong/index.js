@@ -17,18 +17,16 @@ function runProgram(){
       S: 83
   }
   
-  var rightPaddle = properties('#rightPaddle', 420, 180, 0, 0);
-  var leftPaddle = properties('#leftPaddle', 0, 180, 0, 0);
-  var ball = properties('#gameItem', 200, 200, 2, 3);
+  var rightPaddle = Properties('#rightPaddle', 420, 180, 0, 0);
+  var leftPaddle = Properties('#leftPaddle', 0, 180, 0, 0);
+  var ball = Properties('#gameItem', 200, 200, 4, 3);
 
-  var board = $('board');
+  var board = $('#board');
   var boardWidth = board.width();
   var boardHeight = board.height();
-  var paddleHeight = leftPaddle.height;
-  var paddleWidth = leftPaddle.width;
   var boardXBound = boardWidth - ball.width;
   var boardYBound2 = boardHeight - ball.height;
-  var boardYBound = boardHeight - paddleHeight;
+  var boardYBound = boardHeight - leftPaddle.height;
   var points1 = 0;
   var points2 = 0;
   // var boardXBound = ;
@@ -57,7 +55,13 @@ function runProgram(){
     redrawBall();
     reset();
     gamePoint();
-    doCollide();
+
+    if (doCollide(ball, leftPaddle)){
+        ball.speedX = -ball.speedX;
+    };
+    if (doCollide(ball, rightPaddle)){
+        ball.speedX = -ball.speedX;
+    }
   }
   
   /* 
@@ -66,7 +70,6 @@ function runProgram(){
   function handleKeyDown(event) {
     if (event.which === KEY.DOWN) {
         rightPaddle.speedY = 5;
-        console.log('works');
     } else if (event.which === KEY.UP) {
         rightPaddle.speedY = -5;
     }
@@ -98,7 +101,7 @@ function runProgram(){
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  function properties($id, x, y, speedX, speedY) {
+  function Properties($id, x, y, speedX, speedY) {
     var objTest = {};
 
     objTest.id = $id;
@@ -166,22 +169,19 @@ function runProgram(){
       }
   }
   //square1 --- ball,   square2 --- leftPaddle
- function doCollide(){
-   if (ball.x < leftPaddle.rightX &&
-       ball.rightX > leftPaddle.x &&
-       ball.y < leftPaddle.bottomY &&
-       ball.bottomY > leftPaddle.y){
-          ball.speedX = -ball.speedX;
-          ball.speedY = -ball.speedY;
-    } else if (ball.x < rightPaddle.rightX &&
-               ball.rightX > rightPaddle.x &&
-               ball.y < rightPaddle.bottomY &&
-               ball.bottomY > rightPaddle.y){
-                   ball.speedX = -ball.speedX;
-                   ball.speedY = -ball.speedY;
-               }
+ function doCollide(obj1, obj2){
+   if (obj1.x < obj2.rightX &&
+       obj1.rightX > obj2.x &&
+       obj1.y < obj2.bottomY &&
+       obj1.bottomY > obj2.y){
+          return true;
+    } else {
+        return false;
+    }
  }
 
+ /*ball.speedX = -ball.speedX;
+          ball.speedY = -ball.speedY
  /* (square1.leftX < square2.rightX &&
         square1.rightX > square2.leftX &&
         square1.topY < square2.bottomY &&
