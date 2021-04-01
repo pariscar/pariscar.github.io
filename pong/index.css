@@ -44,7 +44,7 @@ body {
 
 #leftPaddle {
     background-color: white;
-    width: 20px;
+    width: 15px;
     height: 80px;
     position: absolute;
     top: 180px;
@@ -52,7 +52,7 @@ body {
 
 #rightPaddle {
     background-color: white;
-    width: 20px;
+    width: 15px;
     height: 80px;
     position: absolute;
     left: 420px;

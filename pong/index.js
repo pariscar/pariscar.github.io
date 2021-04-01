@@ -17,8 +17,8 @@ function runProgram(){
       S: 83
   }
   
-  var rightPaddle = Properties('#rightPaddle', 420, 180, 0, 0);
-  var leftPaddle = Properties('#leftPaddle', 0, 180, 0, 0);
+  var rightPaddle = Properties('#rightPaddle', 405, 180, 0, 0);
+  var leftPaddle = Properties('#leftPaddle', 20, 180, 0, 0);
   var ball = Properties('#gameItem', 200, 200, 4, 3);
 
   var board = $('#board');
@@ -144,31 +144,31 @@ function runProgram(){
   }
 
   function reset() {                  // replace magic numbers with board bounds; possibly doCollide function
-      if (rightPaddle.y < 0) {
+      if (rightPaddle.y <= 0) {
           rightPaddle.y = 0;
-      } else if (rightPaddle.y > 360) {
+      } else if (rightPaddle.y >= 360) {
           rightPaddle.y = 360;
       }
 
-      if (leftPaddle.y < 0) {
+      if (leftPaddle.y <= 0) {
           leftPaddle.y = 0;
-      } else if (leftPaddle.y > 360) {
+      } else if (leftPaddle.y >= 360) {
           leftPaddle.y = 360;
       }
 
-      if (ball.y >= 410) {
+      if (ball.y >= boardXBound) {
           ball.speedY = -ball.speedY;
-      } else if (ball.y < 0) {
+      } else if (ball.y <= 0) {
           ball.speedY = -ball.speedY;
       }
 
-      if (ball.x >= 410) {
+      if (ball.x >= boardXBound) {
           ball.speedX = -ball.speedX;
-      } else if (ball.x < 0) {
+      } else if (ball.x <= 0) {
           ball.speedX = -ball.speedX;
       }
   }
-  //square1 --- ball,   square2 --- leftPaddle
+ 
  function doCollide(obj1, obj2){
    if (obj1.x < obj2.rightX &&
        obj1.rightX > obj2.x &&
@@ -179,13 +179,6 @@ function runProgram(){
         return false;
     }
  }
-
- /*ball.speedX = -ball.speedX;
-          ball.speedY = -ball.speedY
- /* (square1.leftX < square2.rightX &&
-        square1.rightX > square2.leftX &&
-        square1.topY < square2.bottomY &&
-        square1.bottomY > square2.topY) */
 
  function gamePoint() {
    if (ball.x === 0) {
