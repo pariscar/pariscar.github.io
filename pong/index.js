@@ -58,7 +58,7 @@ function runProgram(){
 
     if (doCollide(ball, leftPaddle)){
         ball.speedX = -ball.speedX;
-    };
+    }
     if (doCollide(ball, rightPaddle)){
         ball.speedX = -ball.speedX;
     }
@@ -174,7 +174,7 @@ function runProgram(){
        obj1.rightX > obj2.x &&
        obj1.y < obj2.bottomY &&
        obj1.bottomY > obj2.y){
-          return true;
+        return true;
     } else {
         return false;
     }
