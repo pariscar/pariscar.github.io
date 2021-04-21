@@ -71,7 +71,7 @@ function runProgram(){
   Called in response to events.
   */
   
-  function showScore(){
+  function showScore(){         // displays score
     $("#leftScore").text("Player 1: " + pointsL).css("font-family", 'OCR A Std, monospace');
     $("#rightScore").text("Player 2: " + pointsR).css("font-family", 'OCR A Std, monospace');
   }
@@ -104,13 +104,11 @@ function runProgram(){
       }
   }
 
-  /* score board */
-
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  function Properties($id, x, y, speedX, speedY) {    // ??
+  function Properties($id, x, y, speedX, speedY) {   
     var objTest = {};
 
     objTest.id = $id;
