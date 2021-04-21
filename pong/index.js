@@ -17,7 +17,7 @@ function runProgram(){
       S: 83
   }
   
-  var rightPaddle = Properties('#rightPaddle', 405, 180, 0, 0);
+  var rightPaddle = Properties('#rightPaddle', 405, 180, 0, 0); // id, x, y, speedX, speedY
   var leftPaddle = Properties('#leftPaddle', 20, 180, 0, 0);
   var ball = Properties('#gameItem', 200, 200, 4, 3);
 
