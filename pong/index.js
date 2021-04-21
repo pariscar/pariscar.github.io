@@ -16,10 +16,13 @@ function runProgram(){
       W: 87,
       S: 83
   }
-  
-  var rightPaddle = Properties('#rightPaddle', 405, 180, 0, 0); // id, x, y, speedX, speedY
-  var leftPaddle = Properties('#leftPaddle', 20, 180, 0, 0);
+
+  var leftPaddle = Properties('#leftPaddle', 5, 180, 0, 0);
+  var rightPaddle = Properties('#rightPaddle', 418, 180, 0, 0); // id, x, y, speedX, speedY
   var ball = Properties('#gameItem', 200, 200, 4, 3);
+
+  var leftScore = $('#leftScore');
+  var rightScore = $('#rightScore');
 
   var board = $('#board');
   var boardWidth = board.width();
@@ -27,10 +30,8 @@ function runProgram(){
   var boardXBound = boardWidth - ball.width;
   var boardYBound2 = boardHeight - ball.height;
   var boardYBound = boardHeight - leftPaddle.height;
-  var points1 = 0;
-  var points2 = 0;
-  // var boardXBound = ;
-  // var boardYBound = ;
+  var pointsL = 0;
+  var pointsR = 0;
 
   // Game Item Objects
 
@@ -39,6 +40,11 @@ function runProgram(){
   var interval = setInterval(newFrame, FRAMES_PER_SECOND_INTERVAL);   // execute newFrame every 0.0166 seconds (60 Frames per second)
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyUp);
+
+  $("<p>").appendTo(leftScore).text("Player 1: " + pointsL).css('color', 'black')
+                                                             .css('font-family', 'OCR A Std, monospace');
+  $("<p>").appendTo(rightScore).text("Player 2: " + pointsR).css('color', 'black')
+                                                              .css('font-family', 'OCR A Std, monospace');
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -53,8 +59,8 @@ function runProgram(){
     repositionBall();
     redrawPaddles();
     redrawBall();
-    reset();
-    gamePoint();
+    resetPaddles();
+    resetBall();
 
     if (doCollide(ball, leftPaddle)){
         ball.speedX = -ball.speedX;
@@ -119,10 +125,14 @@ function runProgram(){
 
   function repositionPaddles() {
     rightPaddle.x += rightPaddle.speedX;
+    rightPaddle.rightX = rightPaddle.x + rightPaddle.width;
     rightPaddle.y += rightPaddle.speedY;
+    rightPaddle.bottomY = rightPaddle.y + rightPaddle.height;
 
     leftPaddle.x += leftPaddle.speedX;
+    leftPaddle.rightX = leftPaddle.x + leftPaddle.width;
     leftPaddle.y += leftPaddle.speedY;
+    leftPaddle.bottomY = leftPaddle.y + leftPaddle.height;
   }
 
   function repositionBall() {
@@ -143,32 +153,42 @@ function runProgram(){
     $('#gameItem').css('top', ball.y);
   }
 
-  function reset() {                  // replace magic numbers with board bounds; possibly doCollide function
-      if (rightPaddle.y <= 0) {
-          rightPaddle.y = 0;
-      } else if (rightPaddle.y >= 360) {
-          rightPaddle.y = 360;
-      }
+  function resetPaddles() {  
+    if (leftPaddle.y < 0){
+        leftPaddle.y = 0;
+    } else if (leftPaddle.y > boardYBound) {
+        leftPaddle.y = boardYBound;
+    }
 
-      if (leftPaddle.y <= 0) {
-          leftPaddle.y = 0;
-      } else if (leftPaddle.y >= 360) {
-          leftPaddle.y = 360;
-      }
-
-      if (ball.y >= boardXBound) {
-          ball.speedY = -ball.speedY;
-      } else if (ball.y <= 0) {
-          ball.speedY = -ball.speedY;
-      }
-
-      if (ball.x >= boardXBound) {
-          ball.speedX = -ball.speedX;
-      } else if (ball.x <= 0) {
-          ball.speedX = -ball.speedX;
-      }
+    if (rightPaddle.y < 0){
+        rightPaddle.y = 0;
+    } else if (rightPaddle.y > boardYBound) {
+        rightPaddle.y = boardYBound;
+    }
   }
- 
+
+  function resetBall() {
+    if (ball.x < 0){
+        ball.speedX = -ball.speedX;
+        pointsR++;
+        //ball.x = 200;
+        //ball.y = 200;
+        // console.log(pointsR);
+    } else if (ball.x > boardXBound) {
+        ball.speedX = -ball.speedX;
+        pointsL++;
+        //ball.x = 200;
+        //ball.y = 200;
+        // console.log(pointsL);
+    }
+
+    if (ball.y < 0) {
+        ball.speedY = -ball.speedY;
+    } else if (ball.y > boardYBound2) {
+        ball.speedY = -ball.speedY;
+    }
+  }
+  
  function doCollide(obj1, obj2){
    if (obj1.x < obj2.rightX &&
        obj1.rightX > obj2.x &&
@@ -179,27 +199,6 @@ function runProgram(){
         return false;
     }
  }
-
- function gamePoint() {
-   if (ball.x === 0) {
-        points2++;
-        //console.log(points2);
-   } else if (ball.x === 410) {
-        points1++;
-        console.log(points1);          
-      }
-  }
-  var $score = $("#score");
-  $("<p>").appendTo($score).text("Player 1 score: " + points1).css('color', 'white');
-  $("<p>").appendTo($score).text("Player 2 score: " + points2).css('color', 'white');
-
-  /*       if (ballX <= leftPaddleXPos && ballY <= leftPaddleYPos) {
-          points2 = points2 + 1;
-          console.log(points2);
-      } else if (ballX <= rightPaddleXPos && ballY <= rightPaddleYPos) {
-          points1 = points1 + 1;
-      }
- */
 
   function endGame() {
     // stop the interval timer

@@ -130,10 +130,14 @@ function runProgram(){
 
   function repositionPaddles() {
     rightPaddle.x += rightPaddle.speedX;
+    rightPaddle.rightX = rightPaddle.x + rightPaddle.width;
     rightPaddle.y += rightPaddle.speedY;
+    rightPaddle.bottomY = rightPaddle.y + rightPaddle.height;
 
     leftPaddle.x += leftPaddle.speedX;
+    leftPaddle.rightX = leftPaddle.x + leftPaddle.width;
     leftPaddle.y += leftPaddle.speedY;
+    leftPaddle.bottomY = leftPaddle.y + leftPaddle.height;
   }
 
   function repositionBall() {
