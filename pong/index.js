@@ -41,10 +41,11 @@ function runProgram(){
   $(document).on('keydown', handleKeyDown);                           // change 'eventType' to the type of event you want to handle
   $(document).on('keyup', handleKeyUp);
 
-  $("<p>").appendTo(leftScore).text("Player 1: " + pointsL).css('color', 'black')
-                                                             .css('font-family', 'OCR A Std, monospace');
-  $("<p>").appendTo(rightScore).text("Player 2: " + pointsR).css('color', 'black')
-                                                              .css('font-family', 'OCR A Std, monospace');
+  $("<p>").appendTo(leftScore).attr("id", "leftScore").text("Player 1: " + pointsL).css('color', 'black')
+                                                                                   .css('font-family', 'OCR A Std, monospace');
+
+  $("<p>").appendTo(rightScore).attr("id", "rightScore").text("Player 2: " + pointsR).css('color', 'black')
+                                                                                     .css('font-family', 'OCR A Std, monospace');
 
   ////////////////////////////////////////////////////////////////////////////////
   ///////////////////////// CORE LOGIC ///////////////////////////////////////////
@@ -54,6 +55,7 @@ function runProgram(){
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
+
   function newFrame() {
     repositionPaddles();
     repositionBall();
@@ -65,6 +67,7 @@ function runProgram(){
     if (doCollide(ball, leftPaddle)){
         ball.speedX = -ball.speedX;
     }
+
     if (doCollide(ball, rightPaddle)){
         ball.speedX = -ball.speedX;
     }
@@ -137,7 +140,9 @@ function runProgram(){
 
   function repositionBall() {
     ball.x += ball.speedX;
+    ball.rightX = ball.x + ball.width;
     ball.y += ball.speedY;
+    ball.bottomY = ball.y + ball.height;
   }
 
   function redrawPaddles() {
@@ -173,13 +178,13 @@ function runProgram(){
         pointsR++;
         //ball.x = 200;
         //ball.y = 200;
-        // console.log(pointsR);
+        console.log(pointsR);
     } else if (ball.x > boardXBound) {
         ball.speedX = -ball.speedX;
         pointsL++;
         //ball.x = 200;
         //ball.y = 200;
-        // console.log(pointsL);
+        console.log(pointsL);
     }
 
     if (ball.y < 0) {
@@ -188,6 +193,10 @@ function runProgram(){
         ball.speedY = -ball.speedY;
     }
   }
+
+  //showResult(pointsL);
+  //showResult(pointsR);
+
   
  function doCollide(obj1, obj2){
    if (obj1.x < obj2.rightX &&
