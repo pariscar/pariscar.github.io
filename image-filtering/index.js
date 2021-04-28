@@ -20,8 +20,11 @@ $(document).ready(function(){
 function applyFilter(){
     for(var r = 0; r < image.length; r++){
         for(var c = 0; c < image[r].length; c++){
-            var rgbString = image[1][1];
-            
+            var rgbString = image[0][0];
+            var rgbNumbers = rgbStringToArray(rgbString);
+            rgbNumbers[RED] = 255;
+            rgbString = rgbArrayToString(rgbNumbers);
+            rgbString = image[0][0];
         }
     }
 }
