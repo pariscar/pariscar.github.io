@@ -4,12 +4,7 @@ $(document).ready(function(){
     const $display = $('#display');
 
     // TODO: Call your apply function(s) here
-    //applyFilter(reddify);
     applyFilterNoBackground(blueify);
-    //applyFilterNoBackground(filterFunction);
-    //applyFilter(decreaseBlue);
-    //applyFilter(increaseGreenByBlue);
-
 
     render($display, image);
 });
