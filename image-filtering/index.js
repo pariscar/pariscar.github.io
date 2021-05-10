@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     // TODO: Call your apply function(s) here
     //applyFilter(reddify);
-    applyFilterNoBackground(reddify);
+    applyFilterNoBackground(blueify);
     //applyFilterNoBackground(filterFunction);
     //applyFilter(decreaseBlue);
     //applyFilter(increaseGreenByBlue);
@@ -37,12 +37,13 @@ function applyFilterNoBackground(filterFunction){
         for (var c = 0; c < image[r].length; c++){
             var rgbString = image[r][c];
             if (image[r][c] === image[0][0]){
-                
+                image[r][c] = "rgb(150, 150, 150)";
+            } else {
+                var rgbNumbers = rgbStringToArray(rgbString);
+                filterFunction(rgbNumbers);
+                rgbString = rgbArrayToString(rgbNumbers);
+                image[r][c] = rgbString; 
             }
-            var rgbNumbers = rgbStringToArray(rgbString);
-            filterFunction(rgbNumbers);
-            rgbString = rgbArrayToString(rgbNumbers);
-            image[r][c] = rgbString;
         }
     }
 }
